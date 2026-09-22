@@ -1,0 +1,6 @@
+{
+  "systems": [
+    { "id": "white-cube", "name": "White Cube", "aesthetic": "soft-tactile gallery minimalism with an instrument-panel voice", "version": "2", "locked": "2026-09-17", "status": "locked", "origin": "builtbylee/dissect", "path": "systems/white-cube" },
+    { "id": "star-race", "name": "Star Race", "aesthetic": "White Cube translated for a game — the pieces are the colour", "version": "1", "locked": "2026-09-22", "status": "approved", "derived-from": "white-cube@2", "origin": "builtbylee/genius-star", "path": "systems/star-race" }
+  ]
+}

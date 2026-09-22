@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Design tokens",
+  "type": "object",
+  "required": ["name", "version", "color", "radius", "shadow", "font", "motion"],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "locked": { "type": "string", "description": "ISO date the version was frozen" },
+    "derived-from": { "type": "string", "description": "<system>@<version>" },
+    "source": { "type": "string" },
+    "color": { "type": "object", "additionalProperties": { "type": "string" } },
+    "radius": { "type": "object", "additionalProperties": { "type": "string" } },
+    "shadow": { "type": "object", "additionalProperties": { "type": "string" } },
+    "font": { "type": "object", "properties": { "ui": {"type":"string"}, "mono": {"type":"string"}, "display": {"type":"string"}, "google": {"type":"string"} } },
+    "motion": { "type": "object", "additionalProperties": { "type": "string" } },
+    "content": { "type": "object", "description": "Colours that belong to the content, not the interface (piece sets, chart series, identity)" },
+    "deltas": { "type": "array", "items": { "type": "string" } }
+  }
+}
