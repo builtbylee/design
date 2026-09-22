@@ -19,6 +19,6 @@ Principles, systems and templates for my projects, written so that any assistant
 | id | aesthetic | version | status |
 |---|---|---|---|
 | `white-cube` | soft-tactile gallery minimalism with an instrument-panel voice | 2 | locked 2026-09-17 |
-| `star-race` | White Cube translated for a game — the pieces are the colour | 1 | approved 2026-09-22 |
+| `starkle` | White Cube translated for a game — the pieces are the colour | 1 | approved 2026-09-22 |
 
 Projects pin a system version (`derived-from: white-cube@2`) and list only their deltas.

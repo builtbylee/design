@@ -1,10 +1,10 @@
 ---
 derived-from: white-cube v2 (2026-09-17)
-project: builtbylee/genius-star (Star Race)
+project: builtbylee/genius-star (Starkle)
 status: approved 2026-09-22
 ---
 
-# Star Race — design system (v1, approved 2026-09-22)
+# Starkle — design system (v1, approved 2026-09-22)
 
 Derived from Dissect's system (docs/DESIGN.md in builtbylee/dissect, "White Cube"), translated for a game. Where a law below differs from Dissect's, the difference is deliberate and explained. Reference artboards: the Direction-D row of the approved canvas (D · Home / Play / Result / Leaderboard); other screens follow the same laws with Direction A's structure.
 
