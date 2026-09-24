@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dossier specimen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  /* Page scaffolding only: not part of the system. */
+  body{overflow-x:hidden}
+  .hero{padding:72px 0 64px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:end}
+  .hero .lede{margin-top:20px}
+  .hero .facts{margin-top:40px}
+  .slot{display:grid;place-items:center;padding:24px;text-align:center;font-size:14px;color:var(--muted)}
+  .dossier{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;align-items:start}
+  .panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:28px}
+  .panel-meta{margin-bottom:8px;font-size:14px;font-weight:600;color:var(--blue)}
+  .panel-title{font-size:clamp(28px,3vw,38px);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--navy)}
+  .panel-sum{max-width:66ch;margin-top:12px;font-size:17px;color:var(--muted)}
+  .panel .facts{margin-bottom:32px}
+  .detail{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px}
+  .num-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:48px;align-items:end;padding:32px}
+  .stack{display:grid;gap:32px;margin-top:32px}
+  .rep-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px 24px}
+  .rep-head h3{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--navy)}
+  .rep-head small{display:block;margin-top:2px;font-size:14px;font-weight:400;color:var(--muted)}
+  .rep-body{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center;margin-top:28px}
+  .rep-value{font-size:clamp(48px,5vw,64px);font-weight:600;line-height:1;letter-spacing:-.04em;color:var(--navy);font-variant-numeric:tabular-nums}
+  .rep-delta{margin-left:10px;font-size:15px;font-weight:600;letter-spacing:0;color:var(--blue);vertical-align:middle}
+  .rep-label{max-width:42ch;margin-top:12px;font-size:15px;color:var(--muted)}
+  .fade{transition:opacity 140ms linear}.fade.swap{opacity:0}
+  .controls{display:grid;gap:28px}
+  .controls h3{margin-bottom:12px;font-size:15px;font-weight:600;color:var(--navy)}
+  .voice-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+  .band .status{min-height:1.5em;margin-top:14px;font-size:14px;color:var(--on-navy)}
+  @media (max-width:1040px){.rep-body,.num-hero{grid-template-columns:1fr;gap:28px}}
+  @media (max-width:980px){.hero-grid,.dossier,.detail,.voice-grid{grid-template-columns:1fr}.hero-grid .portrait{max-width:300px}}
+  @media (max-width:640px){.hero{padding:48px 0}.num-hero{padding:24px 20px}.panel-top .logo{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="#top"><span class="mark">Do</span><span>Dossier<small>Design system v1</small></span></a>
+  <nav aria-label="Specimen sections">
+    <a href="#top" class="on">Record</a><a href="#timeline">Timeline</a><a href="#numbers">Numbers</a><a href="#controls">Controls</a>
+  </nav>
+  <div class="topbar-end">
+    <a class="cta" href="#close">Decide</a>
+    <button type="button" class="navtoggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav">
+      <span class="navtoggle-label">Section</span><span id="navCurrent">Record</span>
+      <svg viewBox="0 0 12 8" width="11" height="8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Specimen sections" hidden>
+  <a href="#top" class="on">Record</a><a href="#timeline">Timeline</a><a href="#numbers">Numbers</a><a href="#controls">Controls</a><a href="#close">Decide</a>
+</nav>
+
+<main id="main" tabindex="-1">
+  <section class="hero" id="top">
+    <div class="shell hero-grid">
+      <div>
+        <h1>Dossier</h1>
+        <p class="lede">A calm record in navy and one blue. The blue only ever means “this one”.</p>
+        <div class="facts">
+          <div><span class="k">Extracted from</span><b class="v">talentbylee.com</b></div>
+          <div><span class="k">Version</span><b class="v">1, 24 September 2026</b></div>
+          <div><span class="k">Status</span><b class="v">Draft, awaiting approval</b></div>
+        </div>
+      </div>
+      <figure class="object portrait slot" aria-label="Portrait slot">
+        <span>Portrait slot, 4:5.<br>The one shadowed object in this section.</span>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section paper" id="timeline">
+    <div class="shell">
+      <div class="head"><span class="num">02</span><h2>Timeline.</h2>
+        <p>The library so far. Select a release to read it; the shadowed panel is the section’s one object.</p></div>
+      <div class="dossier">
+        <div class="timeline" role="tablist" aria-label="Library releases" aria-orientation="vertical">
+          <div class="tl-company is-active" role="presentation">
+            <div class="tl-company-head" aria-hidden="true"><span class="logo sm"><span class="logo-fallback">DO</span></span><span class="tl-company-name">Dossier</span><span class="tl-years">2026</span></div>
+            <button class="tl-role" type="button" role="tab" aria-selected="true" aria-controls="panel" data-i="0"><span class="tl-role-title">v1 extracted<span class="sr-only"> Dossier</span></span><span class="tl-years">24 Sep</span></button>
+          </div>
+          <div class="tl-company" role="presentation">
+            <div class="tl-company-head" aria-hidden="true"><span class="logo sm"><span class="logo-fallback">ST</span></span><span class="tl-company-name">Starkle</span><span class="tl-years">2026</span></div>
+            <button class="tl-role" type="button" role="tab" aria-selected="false" aria-controls="panel" data-i="1"><span class="tl-role-title">v2 as shipped<span class="sr-only"> Starkle</span></span><span class="tl-years">24 Sep</span></button>
+          </div>
+          <div class="tl-company" role="presentation">
+            <div class="tl-company-head" aria-hidden="true"><span class="logo sm"><span class="logo-fallback">WC</span></span><span class="tl-company-name">White Cube</span><span class="tl-years">2026</span></div>
+            <button class="tl-role" type="button" role="tab" aria-selected="false" aria-controls="panel" data-i="2"><span class="tl-role-title">14 atoms annotated<span class="sr-only"> White Cube</span></span><span class="tl-years">24 Sep</span></button>
+            <button class="tl-role" type="button" role="tab" aria-selected="false" aria-controls="panel" data-i="3"><span class="tl-role-title">v2 locked<span class="sr-only"> White Cube</span></span><span class="tl-years">17 Sep</span></button>
+          </div>
+        </div>
+        <article class="object pad panel" id="panel" role="tabpanel" aria-live="polite">
+          <div class="panel-top">
+            <div><p class="panel-meta" data-f="meta"></p><h3 class="panel-title" data-f="title"></h3><p class="panel-sum" data-f="sum"></p></div>
+            <span class="logo lg" aria-hidden="true"><span class="logo-fallback" data-f="mark"></span></span>
+          </div>
+          <div class="facts" data-f="facts"></div>
+          <div class="detail">
+            <div class="block"><h3>What it holds</h3><ul class="bullets" data-f="bullets"></ul></div>
+            <div class="block"><h3>Why it exists</h3><p class="note" data-f="note"></p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="numbers">
+    <div class="shell">
+      <div class="head"><span class="num">03</span><h2>Numbers.</h2>
+        <p>Figures are tabular sans, never monospace, with their label in visible text beneath.</p></div>
+      <div class="object num-hero">
+        <div>
+          <p class="fig-meta"><b>Colour tokens</b> in Dossier v1</p>
+          <p class="fig-hero">15</p>
+          <p class="fig-label">Four more than White Cube. The extra four are marks that must never carry text, which is why they have names.</p>
+        </div>
+        <div>
+          <div class="trend" role="img" aria-label="Colour tokens per system: White Cube 11, Starkle 12, Dossier 15">
+            <span class="trend-bar" style="--h:73%"><span class="bv">11</span></span>
+            <span class="trend-bar" style="--h:80%"><span class="bv">12</span></span>
+            <span class="trend-bar peak" style="--h:100%"><span class="bv">15</span></span>
+          </div>
+          <div class="trend-labels" aria-hidden="true"><span>White Cube</span><span>Starkle</span><span>Dossier</span></div>
+          <p class="trend-yoy">The blue bar is the latest, not the largest.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="facts" style="--cols:3">
+          <div><span class="when">Navy on white</span><span class="fig">15.5:1</span><span class="lab">Headings and figures</span></div>
+          <div><span class="when">Muted on paper</span><span class="fig">6.6:1</span><span class="lab">Secondary text, lowest ground</span></div>
+          <div><span class="when">Touch target</span><span class="fig">44px</span><span class="lab">Every control, including dots</span></div>
+        </div>
+
+        <div class="flat" data-rep>
+          <div class="rep-head">
+            <h3>Contrast, site to system<small>WCAG ratio before and after each ★ delta</small></h3>
+            <div class="seg" role="group" aria-label="Choose a pair">
+              <button type="button" aria-pressed="true" data-v="0">Selected row</button>
+              <button type="button" aria-pressed="false" data-v="1">Step number</button>
+              <button type="button" aria-pressed="false" data-v="2">Menu, active</button>
+              <button type="button" aria-pressed="false" data-v="3">Secondary</button>
+            </div>
+          </div>
+          <div class="rep-body">
+            <div class="fade" id="readout">
+              <p class="rep-value"><span id="rv">5.82:1</span><span class="rep-delta" id="rd">+1.34</span></p>
+              <p class="rep-label" id="rl">Blue title on the pale selection fill. The site’s 4.48:1 fails; blue-deep passes.</p>
+            </div>
+            <div class="range" aria-label="Contrast ratios, 0 to 16">
+              <div class="range-row on"><span>Selected row</span><span class="range-track"><i class="range-line" style="--a:28;--b:36.4"></i><i class="range-dot from" style="--a:28"></i><i class="range-dot to" style="--b:36.4"></i></span><span class="range-vals">4.48 → 5.82</span></div>
+              <div class="range-row"><span>Step number</span><span class="range-track"><i class="range-line" style="--a:15.1;--b:44.1"></i><i class="range-dot from" style="--a:15.1"></i><i class="range-dot to" style="--b:44.1"></i></span><span class="range-vals">2.42 → 7.06</span></div>
+              <div class="range-row"><span>Menu, active</span><span class="range-track"><i class="range-line" style="--a:28;--b:36.4"></i><i class="range-dot from" style="--a:28"></i><i class="range-dot to" style="--b:36.4"></i></span><span class="range-vals">4.48 → 5.82</span></div>
+              <div class="range-row"><span>Secondary</span><span class="range-track"><i class="range-line" style="--a:44.1;--b:44.1"></i><i class="range-dot from" style="--a:44.1"></i><i class="range-dot to" style="--b:44.1"></i></span><span class="range-vals">7.06 → 7.06</span></div>
+              <div class="range-axis" aria-hidden="true"><span></span><div><span style="--t:0">0</span><span style="--t:28.1">4.5</span><span style="--t:50">8</span><span style="--t:75">12</span><span style="--t:100">16</span></div><span></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="note"><b>How these were measured.</b> WCAG 2.1 relative luminance on the hex values in <code>tokens.css</code>, against the ground each pair actually sits on. 4.5 is the pass line for text under 24px.</p>
+        <div class="award">
+          <span class="award-mark" aria-hidden="true">★</span>
+          <div><p class="award-meta"><b>Deltas</b><span class="dot-sep"></span>3 fixes the site should also take</p>
+            <p class="award-title">Accessibility measured, then corrected</p>
+            <p class="award-desc">Blue-deep for text on the selection fill, faint grey kept off text, and every control at 44px.</p></div>
+          <span class="pill">3 of 3 applied</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper" id="controls">
+    <div class="shell">
+      <div class="head"><span class="num">04</span><h2>Controls and voice.</h2>
+        <p>Hairline and ghost controls; one solid thing per region.</p></div>
+      <div class="voice-grid">
+        <div class="controls">
+          <div><h3>Step chips</h3>
+            <div class="steps" role="group" aria-label="Screen steps">
+              <button class="step" type="button" aria-pressed="true"><b>1</b>Choose a role</button>
+              <button class="step" type="button" aria-pressed="false"><b>2</b>Read the panel</button>
+              <button class="step" type="button" aria-pressed="false"><b>3</b>Compare</button>
+            </div></div>
+          <div><h3>Carousel controls</h3>
+            <div class="pager">
+              <p class="pager-count" aria-live="polite"><b id="pc">1</b><span class="sep">/</span>5</p>
+              <div class="pager-dots" role="group" aria-label="Slides">
+                <button class="pager-dot" type="button" aria-label="Slide 1" aria-current="true"></button><button class="pager-dot" type="button" aria-label="Slide 2"></button><button class="pager-dot" type="button" aria-label="Slide 3"></button><button class="pager-dot" type="button" aria-label="Slide 4"></button><button class="pager-dot" type="button" aria-label="Slide 5"></button>
+              </div>
+              <div class="pager-btns"><button class="pager-btn" type="button" aria-label="Previous slide" data-d="-1">←</button><button class="pager-btn" type="button" aria-label="Next slide" data-d="1">→</button></div>
+            </div></div>
+          <div><h3>Primary</h3><a class="cta" href="#close">Decide</a></div>
+        </div>
+        <div class="voice">
+          <p>The sans states the record. The serif is the person saying what it meant.</p>
+          <p>It never sets a label, a figure or a heading. If a line could sit in a table, it is sans.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="close">
+    <div class="shell">
+      <h2>Your <em>call.</em></h2>
+      <p>Approve Dossier v1 as it stands, or mark up what should change. The source files are in the library.</p>
+      <div class="button-row">
+        <a class="button" href="https://github.com/builtbylee/design/tree/main/systems/dossier">Open the files</a>
+        <button class="button secondary" type="button" id="copy">Copy the path</button>
+      </div>
+      <p class="status" id="copyStatus" role="status"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EASE = 'cubic-bezier(0.32, 0.72, 0, 1)';
+  var releases = [
+    { meta: 'Dossier · 24 September 2026', title: 'v1 extracted', mark: 'DO',
+      sum: 'Navy and one blue, lifted from talentbylee.com and corrected where it measured short.',
+      facts: [['15', 'colour tokens'], ['16', 'atoms annotated'], ['3', '★ deltas']],
+      bullets: ['Tokens, components.css and one file per atom', 'Every value cites a line of the source stylesheet', 'Contrast measured on the real grounds'],
+      note: 'The library needed a system for a professional record: calm, factual, and clear about where the reader is.' },
+    { meta: 'Starkle · 24 September 2026', title: 'v2 as shipped', mark: 'ST',
+      sum: 'White Cube translated for a game, consolidated from the shipped product.',
+      facts: [['12', 'colour tokens'], ['4', 'content colours'], ['1', 'parent system']],
+      bullets: ['Derived from white-cube@2', 'The pieces carry the colour', 'Renamed from star-race'],
+      note: 'It shows how a system moves to a new domain law by law instead of being copied.' },
+    { meta: 'White Cube · 24 September 2026', title: '14 atoms annotated', mark: 'WC',
+      sum: 'Each atom written up with role, reason, evidenced spec, states and copy.',
+      facts: [['14', 'atoms'], ['11', 'colour tokens'], ['1', 'specimen']],
+      bullets: ['components.css completed', 'Measured, Interpreted and Guess evidence', 'A specimen rendered from the files alone'],
+      note: 'It set the standard every later system is annotated to.' },
+    { meta: 'White Cube · 17 September 2026', title: 'v2 locked', mark: 'WC',
+      sum: 'Gallery minimalism with an instrument-panel voice, extracted from Dissect.',
+      facts: [['4', 'radii'], ['3', 'shadows'], ['2', 'easings']],
+      bullets: ['Achromatic surfaces', 'Instrument Sans with DM Mono for values', 'Light only'],
+      note: 'The first system: the interface has no colour of its own.' }
+  ];
+  var panel = document.getElementById('panel');
+  var f = function (k) { return panel.querySelector('[data-f="' + k + '"]'); };
+  var tabs = [].slice.call(document.querySelectorAll('.tl-role'));
+  var current = 0;
+  function render(i, animate) {
+    var r = releases[i], dir = i > current ? 1 : -1, h0 = panel.offsetHeight;
+    tabs.forEach(function (t, n) { t.setAttribute('aria-selected', n === i); t.tabIndex = n === i ? 0 : -1; t.closest('.tl-company').classList.toggle('is-active', n === i || t.closest('.tl-company').contains(tabs[i])); });
+    f('meta').textContent = r.meta; f('title').textContent = r.title; f('sum').textContent = r.sum; f('mark').textContent = r.mark; f('note').textContent = r.note;
+    f('facts').innerHTML = r.facts.map(function (p) { return '<div><span class="fig sm">' + p[0] + '</span><span class="lab">' + p[1] + '</span></div>'; }).join('');
+    f('bullets').innerHTML = r.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('');
+    if (animate && !reduce && panel.animate) {
+      panel.animate([{ height: h0 + 'px' }, { height: panel.offsetHeight + 'px' }], { duration: 420, easing: EASE });
+      [].forEach.call(panel.children, function (p, n) {
+        p.animate([{ opacity: 0, transform: 'translateY(' + dir * 18 + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: n * 45, easing: EASE, fill: 'backwards' });
+      });
+    }
+    current = i;
+  }
+  tabs.forEach(function (t, n) {
+    t.addEventListener('click', function () { if (n !== current) render(n, true); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0; if (!d) return;
+      e.preventDefault(); var j = (current + d + tabs.length) % tabs.length; render(j, true); tabs[j].focus();
+    });
+  });
+  render(0, false);
+
+  var pairs = [
+    ['5.82:1', '+1.34', 'Blue title on the pale selection fill. The site’s 4.48:1 fails; blue-deep passes.'],
+    ['7.06:1', '+4.64', 'Step numbers moved from faint grey (2.42:1) to muted. Faint stays for separators only.'],
+    ['5.82:1', '+1.34', 'The active item in the phone menu, the same fix as the selected row.'],
+    ['7.06:1', 'unchanged', 'Secondary text on white already passed. It is shown for scale.']
+  ];
+  var segs = [].slice.call(document.querySelectorAll('[data-rep] .seg button'));
+  var rows = [].slice.call(document.querySelectorAll('.range-row'));
+  var readout = document.getElementById('readout');
+  segs.forEach(function (b, n) {
+    b.addEventListener('click', function () {
+      segs.forEach(function (s) { s.setAttribute('aria-pressed', s === b); });
+      rows.forEach(function (r, m) { r.classList.toggle('on', m === n); });
+      readout.classList.add('swap');
+      setTimeout(function () {
+        document.getElementById('rv').textContent = pairs[n][0]; document.getElementById('rd').textContent = pairs[n][1]; document.getElementById('rl').textContent = pairs[n][2];
+        readout.classList.remove('swap');
+      }, reduce ? 0 : 140);
+    });
+  });
+
+  var steps = [].slice.call(document.querySelectorAll('.step'));
+  steps.forEach(function (s) { s.addEventListener('click', function () { steps.forEach(function (x) { x.setAttribute('aria-pressed', x === s); }); }); });
+
+  var dots = [].slice.call(document.querySelectorAll('.pager-dot')), slide = 0;
+  function go(i) { slide = (i + dots.length) % dots.length; dots.forEach(function (d, n) { if (n === slide) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); }); document.getElementById('pc').textContent = slide + 1; }
+  dots.forEach(function (d, n) { d.addEventListener('click', function () { go(n); }); });
+  [].forEach.call(document.querySelectorAll('.pager-btn'), function (b) { b.addEventListener('click', function () { go(slide + +b.dataset.d); }); });
+
+  var toggle = document.getElementById('navToggle'), menu = document.getElementById('mobileNav');
+  toggle.addEventListener('click', function () { var open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', open); menu.hidden = !open; });
+  menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') { toggle.setAttribute('aria-expanded', 'false'); menu.hidden = true; } });
+
+  var copy = document.getElementById('copy'), status = document.getElementById('copyStatus');
+  copy.addEventListener('click', function () {
+    var path = 'github.com/builtbylee/design/tree/main/systems/dossier';
+    var done = function () { copy.textContent = 'Copied'; status.textContent = 'Copied ' + path; setTimeout(function () { copy.textContent = 'Copy the path'; }, 2000); };
+    var fail = function () { status.textContent = 'Copy failed, select the path instead: ' + path; };
+    try { navigator.clipboard.writeText(path).then(done, fail); } catch (e) { fail(); }
+  });
+})();
+</script>
+</body>
+</html>

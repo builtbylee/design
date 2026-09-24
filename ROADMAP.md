@@ -5,12 +5,13 @@
 |---|---|---|
 | `white-cube` v2 | extracted from Dissect | locked; 14 atoms annotated in `components/`; complete `components.css`; `specimen.html` |
 | `starkle` v2 | derived from white-cube@2 for a game | approved; consolidated from the shipped product; no `components/` yet |
+| `dossier` v1 | extracted from talentbylee.com | draft, awaiting approval from its specimen; 16 atoms annotated; 3 ★ deltas the site should also take |
 
 Templates: `DESIGN.template.md`, `COMPONENT.template.md`, `tokens.schema.json` (now with a `size` group) and `TRANSLATE.md`.
 
 ## Next, in order
 
-### 1. talentbylee: extract a system
+### 1. talentbylee: extract a system (done as `dossier` v1, awaiting approval)
 Lee's personal site talentbylee.com. The source is `~/leesam` (repo `builtbylee/leesam`). Its `HANDOVER.md` lists the design tokens, timeline structure and interactions. The look is Instrument Sans with Instrument Serif, and navy and blue, matching `verda.talentbylee.com`.
 - **Deliverables:** the full system set (see `CLAUDE.md`), with Measured values citing the site's files.
 - **Name:** a system name that is not the person's name (the library is public).

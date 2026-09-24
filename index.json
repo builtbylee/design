@@ -20,6 +20,15 @@
       "derived-from": "white-cube@2",
       "origin": "builtbylee/starkle",
       "path": "systems/starkle"
+    },
+    {
+      "id": "dossier",
+      "name": "Dossier",
+      "aesthetic": "a calm professional record in navy and one blue; hairlines for facts, one shadow per section, a serif for the person's voice",
+      "version": "1",
+      "status": "draft",
+      "origin": "builtbylee/leesam",
+      "path": "systems/dossier"
     }
   ]
 }
