@@ -8,6 +8,8 @@ Principles, systems and templates for my projects, written so that any assistant
 3. Applying a system to a new kind of product? Follow `templates/TRANSLATE.md` and write the project's own `DESIGN.md` from `templates/DESIGN.template.md`, pinned with `derived-from`.
 4. When I show a reference, extract principles into `references/`. Do not copy its fonts, palette or components unless I ask for the system itself.
 
+Assistants working *on* the library (not just applying it): read `CLAUDE.md` and `ROADMAP.md` first.
+
 ## Layout
 - `PRINCIPLES.md` — the layer above systems
 - `index.json` — machine-readable list of systems
