@@ -18,7 +18,7 @@ Lee's personal site talentbylee.com. The source is `~/leesam` (repo `builtbylee/
 
 ### 2. Curated systems: build the library out
 Lee wants high-fidelity, polished, curated systems beyond his own products. Each is original, authored for a clear domain, and distinct from the others. It is not a copy of any real brand.
-1. **Propose a slate first.** Show 4–6 directions before building any in full. For each give a name, a domain, the one-line idea, a palette of 4–6 named hex values, a type pairing, and where it spends its boldness. Publish them as one mockup page with a small specimen strip per direction. Lee picks.
+1. **Propose a slate first.** *(2026-09-24: slate of six published as a private artifact, awaiting Lee's picks: Blue Pencil, Signal Box, Cold Water, Vitrine, Man Page, Overprint.)* Show 4–6 directions before building any in full. For each give a name, a domain, the one-line idea, a palette of 4–6 named hex values, a type pairing, and where it spends its boldness. Publish them as one mockup page with a small specimen strip per direction. Lee picks.
 2. **Cover different ground.** For example:
    - editorial and long-form reading;
    - a data-dense operations dashboard;
