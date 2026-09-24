@@ -29,10 +29,13 @@ Lee wants a curated collection of excellent, highly polished UI (components and 
 - **Next:** grow by kind, with Lee steering the kinds and the sources he admires. A 2026-09-24 slate of six invented brand systems was rejected because it misread this brief. Don't propose whole brand systems as library content.
 
 ### 3. The gallery, now in Dissect
-The library is published as Dissect's public Gallery: https://dissect.builtbylee.workers.dev/gallery (phase A shipped 2026-09-24). Entries here seed it via `npm run gallery:seed:remote` in `builtbylee/dissect`. Still to come there:
-- **B.** Pick components across the library and Gallery, then export one prompt.
-- **C.** Add a capture by URL, with measured values.
-- **D.** Owner drafts plus `/add-to-library` in Claude Code.
+The library is published as Dissect's public Gallery: https://dissect.builtbylee.workers.dev/gallery. Phases A–D all shipped on 2026-09-24:
+- **A.** The public gallery.
+- **B.** Picks: pick parts from different captures and export them as one prompt.
+- **C.** Capture by URL, with measured fonts and recorded motion.
+- **D.** Owner drafts, a review screen, and `/add-to-library` in Claude Code.
+
+To add an entry, run `/add-to-library <url or screenshot>` from the dissect repo, then review and publish it at /gallery/review. The six hand-made entries here were the seed; new entries live in Dissect.
 
 The old private artifact gallery (`library/gallery.html`) is superseded.
 
