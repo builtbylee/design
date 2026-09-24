@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>White Cube specimen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  /* Page scaffolding only: not part of the system. */
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);padding:0 16px 48px}
+  .page{max-width:760px;margin:0 auto}
+  .spec-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin:26px 6px 10px}
+  .row-demo{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .tile{padding:13px 16px;min-height:52px;display:flex;align-items:center;font-weight:600;font-size:14.5px;cursor:pointer}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  h1{font-size:28px;letter-spacing:-.025em;margin:0 0 6px}
+  .lede{margin:0;font-size:16px;line-height:1.55;color:var(--ink2);max-width:52ch}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="wordmark" href="#"><svg class="glyph" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#111114"/></svg><span>White Cube</span></a>
+    <span class="sp"></span>
+    <span class="meta working" role="status"><i class="dot" aria-hidden="true"></i>Dissecting… 12s</span>
+    <button class="icon-btn" type="button" aria-label="Menu" title="Menu"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  </header>
+
+  <section class="sheet" aria-labelledby="h">
+    <h1 id="h">Specimen</h1>
+    <p class="lede">Every White Cube atom, rendered from <code>tokens.css</code> and <code>components.css</code> alone.</p>
+
+    <p class="spec-h">Buttons</p>
+    <div class="row-demo">
+      <button class="btn" type="button">Dissect a sample <span class="cap" aria-hidden="true">→</span></button>
+      <button class="btn quiet" type="button">Choose a file</button>
+      <button class="btn" type="button" disabled>Disabled <span class="cap" aria-hidden="true">→</span></button>
+      <button class="icon-btn" type="button" aria-label="Copy" aria-pressed="true">✓</button>
+    </div>
+
+    <p class="spec-h">Meta pills and evidence</p>
+    <div class="row-demo">
+      <span class="meta"><i class="dot"></i>Dissected in 6s</span>
+      <span class="meta bad"><i class="dot"></i>Rate limited · resets 14:00</span>
+      <span class="ev m"><i></i>Measured</span><span class="ev f"><i></i>Interpreted</span><span class="ev s"><i></i>Guess</span>
+    </div>
+
+    <p class="spec-h">Segmented</p>
+    <div class="seg" role="group" aria-label="Output format">
+      <button type="button" aria-pressed="false">Prompt</button><button type="button" aria-pressed="true">CSS</button><button type="button" aria-pressed="false">Tailwind</button><button type="button" aria-pressed="false">React</button>
+    </div>
+
+    <p class="spec-h">Rows</p>
+    <div class="rows">
+      <div><span class="k">Radius</span><span class="v">30px <span class="ev m"><i></i>Measured</span></span></div>
+      <div><span class="k">Typeface</span><span class="v">Instrument Sans <span class="ev s"><i></i>Guess</span></span></div>
+      <div><span class="k">Shadow</span><span class="v">0 22px 48px −24px</span></div>
+    </div>
+
+    <p class="spec-h">Selection</p>
+    <div class="grid2">
+      <div class="tile">Unselected tile</div>
+      <div class="tile selected">Selected tile</div>
+    </div>
+    <div class="row-demo" style="margin-top:10px">
+      <button class="choice" type="button" aria-pressed="true">React / Next</button>
+      <button class="choice" type="button" aria-pressed="false">Vue / Nuxt</button>
+    </div>
+
+    <p class="spec-h">Input</p>
+    <div class="search"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m11 11 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input type="search" aria-label="Search" placeholder="badges"></div>
+
+    <p class="spec-h">Loading</p>
+    <div aria-busy="true"><span class="sk sk-row" aria-hidden="true"></span><span class="sk sk-row" aria-hidden="true" style="width:70%"></span></div>
+
+    <p class="spec-h">Notices and disclosure</p>
+    <div class="notice"><strong>Two components found</strong><p>A thin result: ask about a region to add more.</p></div>
+    <div class="notice bad" role="alert"><strong>Couldn't reach the server</strong><p>Your capture is kept; retry when you're back online.</p><button class="btn quiet" type="button">Retry now</button></div>
+    <details class="adv"><summary><svg class="caret" viewBox="0 0 15 15" aria-hidden="true"><path d="M5 3l5 4.5L5 12" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Advanced · 6 settings</summary><div class="adv-body"><p class="lede">Folded, never hidden.</p></div></details>
+  </section>
+</div>
+<div class="toasts" aria-live="polite"><div class="toast" role="status"><span>Copied 4 components</span><button class="btn quiet" type="button">Undo</button></div></div>
+</body>
+</html>

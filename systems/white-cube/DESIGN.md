@@ -2,7 +2,7 @@
 
 **Aesthetic:** soft-tactile gallery minimalism with an instrument-panel voice. The gallery convention — achromatic architecture, softly lit, so the exhibit supplies every colour — applied to interface.
 **Origin:** Dissect (builtbylee/dissect). This file is the system alone; Dissect's product screens and component-classification rules stay in that repo.
-**Machine values:** `tokens.json` · `tokens.css` · atoms in `components.css`.
+**Machine values:** `tokens.json` · `tokens.css` · atoms in `components.css`, each annotated in `components/` (role, why, spec with Measured / Interpreted / Guess evidence, states, copy, do/don't).
 
 ## The idea
 **The interface has no colour of its own.** Whatever the product presents — a capture, a board, a photograph — brings the palette. If the UI has an accent it competes with the thing being studied. Achromatic surfaces; the only colour on screen belongs to the content or the user's brand.

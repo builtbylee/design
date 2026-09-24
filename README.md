@@ -11,7 +11,7 @@ Principles, systems and templates for my projects, written so that any assistant
 ## Layout
 - `PRINCIPLES.md` — the layer above systems
 - `index.json` — machine-readable list of systems
-- `systems/<id>/` — `DESIGN.md` (laws, voice) + `tokens.json` (values) + optional `tokens.css`, `components.css`
+- `systems/<id>/` — `DESIGN.md` (laws, voice) + `tokens.json` (values) + optional `tokens.css`, `components.css`, and `components/` (one annotated file per atom)
 - `templates/` — `DESIGN.template.md`, `COMPONENT.template.md` (Dissect-style annotation: role, why, spec table with Measured / Interpreted / Guess evidence chips, states, agent-ready copy), `tokens.schema.json`, `TRANSLATE.md`
 - `references/` — principles extracted from things I admire
 
