@@ -1,0 +1,104 @@
+{
+  "entries": [
+    {
+      "id": "command-menu",
+      "title": "Command menu",
+      "kind": "component",
+      "tags": [
+        "overlay",
+        "navigation",
+        "keyboard",
+        "search"
+      ],
+      "origin": {
+        "type": "study",
+        "maker": "Linear",
+        "name": "Linear's command menu",
+        "url": "https://linear.app"
+      },
+      "summary": "Every action is typeable, and the menu knows what it's acting on.",
+      "height": 560
+    },
+    {
+      "id": "stacked-toasts",
+      "title": "Stacked toasts",
+      "kind": "component",
+      "tags": [
+        "feedback",
+        "notification",
+        "gesture"
+      ],
+      "origin": {
+        "type": "study",
+        "maker": "Emil Kowalski",
+        "name": "Sonner",
+        "url": "https://sonner.emilkowal.ski"
+      },
+      "summary": "Many notifications in the space of one: a deck that fans out when you reach for it.",
+      "height": 440
+    },
+    {
+      "id": "bottom-drawer",
+      "title": "Bottom drawer",
+      "kind": "component",
+      "tags": [
+        "overlay",
+        "mobile",
+        "gesture"
+      ],
+      "origin": {
+        "type": "study",
+        "maker": "Emil Kowalski",
+        "name": "Vaul",
+        "url": "https://vaul.emilkowal.ski"
+      },
+      "summary": "The page recedes like a card, and every layer follows your finger.",
+      "height": 640
+    },
+    {
+      "id": "hold-to-delete",
+      "title": "Hold to delete",
+      "kind": "component",
+      "tags": [
+        "form",
+        "destructive",
+        "feedback"
+      ],
+      "origin": {
+        "type": "original"
+      },
+      "summary": "A deliberate gesture instead of an \"Are you sure?\" dialog.",
+      "height": 400
+    },
+    {
+      "id": "setup-checklist",
+      "title": "Setup checklist",
+      "kind": "component",
+      "tags": [
+        "onboarding",
+        "progress",
+        "disclosure"
+      ],
+      "origin": {
+        "type": "original"
+      },
+      "summary": "Always exactly one next thing, with time left instead of a percentage.",
+      "height": 520
+    },
+    {
+      "id": "pricing-screen",
+      "title": "Pricing screen",
+      "kind": "screen",
+      "tags": [
+        "commerce",
+        "marketing",
+        "numbers"
+      ],
+      "origin": {
+        "type": "original"
+      },
+      "summary": "Switch the billing period and every price rolls, digit by digit.",
+      "height": 720
+    }
+  ]
+}

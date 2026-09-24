@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stacked toasts</title>
+<style>
+  :root{
+    --page:#fafafa;--toast:#ffffff;--ink:#171717;--ink2:#666;--line:#ededed;--btn:#171717;--btn-ink:#fff;
+    --ok:#1a7f37;--bad:#cf222e;--shadow:0 4px 12px rgba(0,0,0,.08);
+    --gap:14px;--peek:14px;--w:356px;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0a0a0a;--toast:#171717;--ink:#ededed;--ink2:#a1a1a1;--line:#262626;--btn:#ededed;--btn-ink:#0a0a0a;--ok:#3fb950;--bad:#ff6b6b;--shadow:0 4px 12px rgba(0,0,0,.4)}}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-size:14px;-webkit-font-smoothing:antialiased}
+  button{font:inherit}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .demo{max-width:520px;padding:28px 20px 220px;display:grid;gap:14px}
+  .demo h1{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .demo p{margin:0;color:var(--ink2);line-height:1.55}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  .row button{min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:var(--toast);color:var(--ink);cursor:pointer}
+  .row button:hover{border-color:var(--ink2)}
+
+  /* the stack */
+  .toaster{position:fixed;right:24px;bottom:24px;width:var(--w);margin:0;padding:0;list-style:none;z-index:10}
+  .toaster::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--hover-pad,0px)} /* keeps hover alive across gaps */
+  .toast{position:absolute;right:0;bottom:0;width:100%;display:flex;align-items:center;gap:10px;padding:16px;border:1px solid var(--line);border-radius:8px;
+    background:var(--toast);box-shadow:var(--shadow);color:var(--ink);font-size:13px;line-height:1.4;touch-action:none;user-select:none;
+    transform:var(--y,translateY(100%)) scale(var(--s,1));opacity:var(--o,0);transform-origin:center bottom;
+    transition:transform 400ms cubic-bezier(.21,1.02,.73,1),opacity 400ms ease,height 400ms ease}
+  .toast.dragging{transition:none}
+  .toast.back{overflow:hidden}
+  .toast > *{transition:opacity 200ms ease}
+  .toast.back > *{opacity:0}
+  .toast .ic{flex:none;width:16px;height:16px}
+  .toast .body{flex:1;min-width:0}
+  .toast .t{font-weight:500}
+  .toast .d{color:var(--ink2);margin-top:2px}
+  .toast .act{flex:none;min-height:28px;padding:0 10px;border:0;border-radius:6px;background:var(--btn);color:var(--btn-ink);font-size:12px;font-weight:500;cursor:pointer;position:relative}
+  .toast .act::after{content:"";position:absolute;inset:-8px -6px} /* 44px touch area around a 28px button */
+  .toast .close{position:absolute;left:-7px;top:-7px;width:20px;height:20px;display:grid;place-items:center;padding:0;border:1px solid var(--line);border-radius:50%;
+    background:var(--toast);color:var(--ink2);cursor:pointer;opacity:0;transition:opacity 150ms}
+  .toaster:hover .close,.toast:focus-within .close{opacity:1}
+  .spin{animation:spin 800ms linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (max-width:600px){.toaster{left:16px;right:16px;width:auto;bottom:16px}}
+  @media (prefers-reduced-motion:reduce){.toast{transition:opacity 150ms ease}.spin{animation-duration:2.4s}}
+</style>
+</head>
+<body>
+<div class="demo">
+  <h1>Stacked toasts</h1>
+  <p>Toasts pile into a deck of three. Hover or focus the deck to fan it out. Swipe a toast down to dismiss it. The timer pauses while you’re reading.</p>
+  <div class="row">
+    <button type="button" data-t="save">Save changes</button>
+    <button type="button" data-t="archive">Archive 3 emails</button>
+    <button type="button" data-t="publish">Publish post</button>
+    <button type="button" data-t="error">Go offline</button>
+  </div>
+</div>
+<section aria-label="Notifications"><ol class="toaster" id="toaster" aria-live="polite"></ol></section>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var toaster = document.getElementById('toaster'), toasts = [], expanded = false, seq = 0;
+  var VISIBLE = 3, GAP = 14, PEEK = 14, DURATION = 4000;
+  var icons = {
+    success:'<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="var(--ok)"/><path d="m4.8 8.2 2.1 2.1 4.3-4.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    error:'<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="var(--bad)"/><path d="M8 4.4v4.3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".95" fill="#fff"/></svg>',
+    loading:'<svg class="ic spin" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="var(--line)" stroke-width="2"/><path d="M8 1.8a6.2 6.2 0 0 1 6.2 6.2" fill="none" stroke="var(--ink2)" stroke-width="2" stroke-linecap="round"/></svg>',
+    none:''
+  };
+
+  function content(t) {
+    return (icons[t.type] || '') + '<div class="body"><div class="t">' + t.title + '</div>' + (t.desc ? '<div class="d">' + t.desc + '</div>' : '') + '</div>' +
+      (t.action ? '<button type="button" class="act">' + t.action + '</button>' : '') +
+      '<button type="button" class="close" aria-label="Dismiss">×</button>';
+  }
+  function add(t) {
+    t.id = ++seq; t.remaining = t.duration === undefined ? DURATION : t.duration;
+    var li = document.createElement('li'); li.className = 'toast'; li.innerHTML = content(t); t.el = li;
+    toaster.appendChild(li); toasts.unshift(t);
+    li.querySelector('.close').addEventListener('click', function () { remove(t); });
+    var act = li.querySelector('.act'); if (act) act.addEventListener('click', function () { t.onAction && t.onAction(); remove(t); });
+    drag(t);
+    requestAnimationFrame(function () { requestAnimationFrame(layout); });
+    tick(t);
+    return t;
+  }
+  function update(t, patch) {
+    Object.assign(t, patch); t.el.innerHTML = content(t);
+    t.el.querySelector('.close').addEventListener('click', function () { remove(t); });
+    t.remaining = t.duration === undefined ? DURATION : t.duration; tick(t); layout();
+  }
+  function remove(t) {
+    if (t.gone) return; t.gone = true; clearTimeout(t.timer);
+    toasts = toasts.filter(function (x) { return x !== t; });
+    t.el.style.setProperty('--o', 0);
+    t.el.style.setProperty('--y', 'translateY(' + (t.dragY > 0 ? '100%' : (reduce ? '0' : '40%')) + ')');
+    setTimeout(function () { t.el.remove(); }, 400);
+    layout();
+  }
+  function tick(t) {
+    clearTimeout(t.timer);
+    if (!isFinite(t.remaining) || expanded || document.hidden) return;
+    t.started = Date.now();
+    t.timer = setTimeout(function () { remove(t); }, t.remaining);
+  }
+  function pauseAll() { toasts.forEach(function (t) { if (t.timer && t.started) { clearTimeout(t.timer); t.remaining -= Date.now() - t.started; t.started = 0; } }); }
+  function resumeAll() { toasts.forEach(tick); }
+
+  // collapsed: a deck, each one PEEK px above and 5% smaller; expanded: stacked by real heights
+  function layout() {
+    if (expanded) toasts.forEach(function (t) { t.el.style.height = ''; t.el.classList.remove('back'); }); // measure natural heights
+    var offset = 0, frontH = toasts[0] ? toasts[0].el.offsetHeight : 0;
+    toasts.forEach(function (t, i) {
+      var el = t.el, h = el.offsetHeight, hidden = i >= VISIBLE;
+      el.style.zIndex = 100 - i;
+      el.inert = hidden;
+      if (expanded) {
+        el.style.height = '';
+        el.classList.remove('back');
+        el.style.setProperty('--y', 'translateY(' + (-offset + (t.dragY || 0)) + 'px)');
+        el.style.setProperty('--s', 1);
+        offset += h + GAP;
+      } else {
+        // back toasts take the front toast's height so the deck edges line up
+        el.style.height = i === 0 ? '' : frontH + 'px';
+        el.classList.toggle('back', i > 0);
+        el.style.setProperty('--y', 'translateY(' + (-PEEK * i + (i === 0 ? (t.dragY || 0) : 0)) + 'px)');
+        el.style.setProperty('--s', 1 - i * 0.05);
+      }
+      el.style.setProperty('--o', hidden ? 0 : 1);
+    });
+    toaster.style.setProperty('--hover-pad', expanded ? offset + 'px' : (PEEK * Math.min(toasts.length - 1, VISIBLE - 1)) + 'px');
+  }
+  function setExpanded(v) { if (expanded === v) return; expanded = v; v ? pauseAll() : resumeAll(); layout(); }
+  toaster.addEventListener('pointerenter', function () { setExpanded(true); });
+  toaster.addEventListener('pointerleave', function () { setExpanded(false); });
+  toaster.addEventListener('focusin', function () { setExpanded(true); });
+  toaster.addEventListener('focusout', function (e) { if (!toaster.contains(e.relatedTarget)) setExpanded(false); });
+  document.addEventListener('visibilitychange', function () { document.hidden ? pauseAll() : resumeAll(); });
+
+  // swipe down to dismiss: past 45px, or a fast flick
+  function drag(t) {
+    var el = t.el, y0 = 0, t0 = 0, on = false;
+    el.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('button')) return;
+      on = true; y0 = e.clientY; t0 = Date.now(); el.setPointerCapture(e.pointerId); el.classList.add('dragging');
+    });
+    el.addEventListener('pointermove', function (e) {
+      if (!on) return; var dy = e.clientY - y0;
+      t.dragY = dy > 0 ? dy : dy * 0.15; // resists upward drags
+      layout();
+    });
+    function end(e) {
+      if (!on) return; on = false; el.classList.remove('dragging');
+      var dy = e.clientY - y0, v = dy / Math.max(1, Date.now() - t0);
+      if (dy > 45 || v > 0.11) remove(t); else { t.dragY = 0; layout(); }
+    }
+    el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+  }
+
+  var actions = {
+    save: function () { add({ type: 'success', title: 'Changes saved' }); },
+    archive: function () { add({ type: 'none', title: '3 emails archived', desc: 'Moved out of your inbox.', action: 'Undo', onAction: function () { add({ type: 'success', title: 'Restored 3 emails' }); } }); },
+    publish: function () {
+      var t = add({ type: 'loading', title: 'Publishing…', duration: Infinity });
+      setTimeout(function () { update(t, { type: 'success', title: 'Post published', desc: 'It’s live at /notes/on-deadlines.', duration: undefined }); }, 1600);
+    },
+    error: function () { add({ type: 'error', title: 'You’re offline', desc: 'Changes will sync when you reconnect.' }); }
+  };
+  document.querySelectorAll('[data-t]').forEach(function (b) { b.addEventListener('click', function () { actions[b.dataset.t](); }); });
+
+  // the demo opens with a deck already showing; these stay until touched
+  add({ type: 'none', title: '3 emails archived', desc: 'Moved out of your inbox.', action: 'Undo', duration: Infinity, onAction: function () { add({ type: 'success', title: 'Restored 3 emails' }); } });
+  add({ type: 'error', title: 'You’re offline', desc: 'Changes will sync when you reconnect.', duration: Infinity });
+  add({ type: 'success', title: 'Post published', desc: 'It’s live at /notes/on-deadlines.', duration: Infinity });
+})();
+</script>
+</body>
+</html>

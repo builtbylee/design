@@ -10,7 +10,7 @@ The layer above any system. True of all my work regardless of palette or typefac
 6. **Real elements, even in mockups.** `<button>`, `<a href>`, `<input>` + `<label>`. Targets ≥ 44px on touch. Contrast ≥ 4.5:1 (3:1 above 24px). Focus rings distinct from selection.
 7. **One filled thing per area.** The primary action is the only solid element in its region.
 8. **Plain voice.** Specific, confident about what is known, blunt about what isn't. No exclamation marks, no "Oops", no marketing verbs, no emoji as UI.
-9. **References are principles, not templates.** When I show a site I admire — mine or anyone's — extract *why* it works. Never reuse its fonts, palette or components unless I explicitly ask for the system itself.
+9. **References are principles, not templates.** When I show a site I admire — mine or anyone's — extract *why* it works. A product never ships another's fonts, palette or components. The one exception is `library/`: credited study rebuilds of public designs, kept for reference, never shipped as-is and never carrying the original's logo or proprietary font files.
 10. **Translate, don't transplant.** A system built for one domain (a tool) is adapted for another (a game) law by law: keep what transfers, change what the domain demands, and write down why. See `templates/TRANSLATE.md`.
 11. **Every state is designed.** Empty, loading, failed, offline, rate-limited, reconnecting. Never a blank panel, never a spinner where a skeleton would tell the truth.
 12. **No filler.** No lorem ipsum, invented stats or decorative data. A missing fact is a visible placeholder.

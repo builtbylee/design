@@ -11,6 +11,7 @@ Principles, systems and templates for my projects, written so that any assistant
 Assistants working *on* the library (not just applying it): read `CLAUDE.md` and `ROADMAP.md` first.
 
 ## Layout
+- `library/` — **the curated UI library**: live entries (components and screens), each with why it works and what to take; `gallery.html` shows them all (built by `tools/build-gallery.mjs`)
 - `PRINCIPLES.md` — the layer above systems
 - `index.json` — machine-readable list of systems
 - `systems/<id>/` — `DESIGN.md` (laws, voice) + `tokens.json` (values) + optional `tokens.css`, `components.css`, and `components/` (one annotated file per atom)

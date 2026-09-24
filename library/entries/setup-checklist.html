@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Setup checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --page:#eceef1;--card:#ffffff;--ink:#101418;--ink2:#5b636c;--ink3:#8a929b;--line:#e6e9ec;--well:#f5f6f8;
+    --done:#1a7f4b;--done-soft:#e3f2ea;--btn:#101418;--on-btn:#ffffff;
+    --ease:cubic-bezier(.2,.8,.2,1);
+    font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0f11;--card:#171a1d;--ink:#eef0f2;--ink2:#9ba3ab;--ink3:#737b83;--line:#272b2f;--well:#1f2326;--done:#4cc38a;--done-soft:#163225;--btn:#eef0f2;--on-btn:#101418}}
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--ink);display:grid;place-items:center;padding:24px 16px;-webkit-font-smoothing:antialiased}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .card{width:min(440px,100%);background:var(--card);border-radius:20px;padding:20px;box-shadow:0 1px 2px rgba(16,20,24,.04),0 18px 40px -24px rgba(16,20,24,.25)}
+  .head{display:flex;align-items:center;gap:14px;padding:4px 4px 16px}
+  .ring{flex:none;width:44px;height:44px;position:relative}
+  .ring svg{width:44px;height:44px;transform:rotate(-90deg)}
+  .ring circle{fill:none;stroke-width:4}
+  .ring .track{stroke:var(--line)}
+  .ring .arc{stroke:var(--done);stroke-linecap:round;stroke-dasharray:113.1;stroke-dashoffset:calc(113.1 * (1 - var(--p,0)));transition:stroke-dashoffset 600ms var(--ease)}
+  .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+  .head h1{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .head p{margin:2px 0 0;font-size:13.5px;color:var(--ink2)}
+  .steps{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+  .step{border-radius:14px;transition:background 200ms}
+  .step.open{background:var(--well)}
+  .row{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:0 12px;border:0;background:none;text-align:left;cursor:pointer;border-radius:14px}
+  .tick{flex:none;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ink3);display:grid;place-items:center;transition:background 200ms,box-shadow 200ms}
+  .tick svg{width:12px;height:12px}
+  .tick path{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14;transition:stroke-dashoffset 280ms 80ms var(--ease)}
+  .done .tick{background:var(--done);box-shadow:none}
+  .done .tick path{stroke-dashoffset:0}
+  @media (prefers-color-scheme:dark){.tick path{stroke:#0d0f11}}
+  .title{flex:1;font-size:15px;font-weight:500}
+  .done .title{color:var(--ink2)}
+  .time{font-size:12.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
+  .done .time{visibility:hidden}
+  /* the detail opens with a grid-rows transition so height animates without measuring */
+  .detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows 320ms var(--ease)}
+  .open .detail{grid-template-rows:1fr}
+  .detail > div{overflow:hidden}
+  .detail .in{padding:0 12px 14px 46px;display:grid;gap:12px;justify-items:start}
+  .detail p{margin:0;font-size:14px;line-height:1.5;color:var(--ink2)}
+  .go{min-height:44px;padding:0 16px;border:0;border-radius:12px;background:var(--btn);color:var(--on-btn);font-weight:600;font-size:14px;cursor:pointer}
+  .complete{display:none;text-align:center;padding:12px 8px 8px}
+  .complete h1{margin:10px 0 4px;font-size:18px}
+  .complete p{margin:0 0 14px;color:var(--ink2);font-size:14px}
+  .complete button{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:12px;background:none;cursor:pointer}
+  .all .steps,.all .head{display:none}.all .complete{display:block}
+  @media (prefers-reduced-motion:reduce){*{transition-duration:1ms!important}}
+</style>
+</head>
+<body>
+<section class="card" id="card" aria-labelledby="h">
+  <div class="head">
+    <div class="ring" aria-hidden="true"><svg viewBox="0 0 44 44"><circle class="track" cx="22" cy="22" r="18"/><circle class="arc" cx="22" cy="22" r="18"/></svg><b id="count">2/5</b></div>
+    <div><h1 id="h">Set up your workspace</h1><p id="left" aria-live="polite">3 steps left, about 6 minutes</p></div>
+  </div>
+  <ol class="steps" id="steps"></ol>
+  <div class="complete" role="status">
+    <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="var(--done-soft)"/><path d="m14 22.5 5.5 5.5 10.5-11" fill="none" stroke="var(--done)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1>You’re set up</h1>
+    <p>Reminders go out on Monday mornings. You can change any of this in Settings.</p>
+    <button type="button" id="again">Show the checklist again</button>
+  </div>
+</section>
+
+<script>
+(function () {
+  var data = [
+    { t: 'Create your workspace', min: 1, d: 'Name it and choose your currency.', a: 'Open workspace', done: true },
+    { t: 'Invite your accountant', min: 1, d: 'They get read-only access until you say otherwise.', a: 'Send invite', done: true },
+    { t: 'Connect your bank', min: 2, d: 'Transactions import every morning. Read-only, and you can disconnect at any time.', a: 'Connect bank' },
+    { t: 'Import last year’s invoices', min: 3, d: 'Drop a CSV or connect your old tool. Duplicates are skipped.', a: 'Import invoices' },
+    { t: 'Turn on payment reminders', min: 1, d: 'Clients get a polite nudge 3 days after an invoice is due.', a: 'Turn on reminders' }
+  ];
+  var list = document.getElementById('steps'), card = document.getElementById('card');
+  list.innerHTML = data.map(function (s, i) {
+    return '<li class="step" data-i="' + i + '"><button class="row" type="button" aria-expanded="false" aria-controls="d' + i + '">' +
+      '<span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="m2.5 6.3 2.3 2.3 4.7-5"/></svg></span>' +
+      '<span class="title">' + s.t + '<span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></span></span><span class="time">' + s.min + ' min</span></button>' +
+      '<div class="detail" id="d' + i + '"><div><div class="in"><p>' + s.d + '</p><button class="go" type="button">' + s.a + '</button></div></div></div></li>';
+  }).join('');
+  var items = [].slice.call(list.children);
+
+  function openOnly(i) {
+    items.forEach(function (li, k) {
+      var on = k === i; li.classList.toggle('open', on);
+      li.querySelector('.row').setAttribute('aria-expanded', on);
+      li.querySelector('.detail').inert = !on;
+    });
+  }
+  function sync() {
+    var n = data.filter(function (s) { return s.done; }).length, left = data.length - n;
+    var mins = data.reduce(function (a, s) { return a + (s.done ? 0 : s.min); }, 0);
+    items.forEach(function (li, k) { li.classList.toggle('done', !!data[k].done); li.querySelector('.sr').textContent = data[k].done ? ', done' : ', not done'; });
+    card.querySelector('.ring').style.setProperty('--p', n / data.length);
+    document.getElementById('count').textContent = n + '/' + data.length;
+    document.getElementById('left').textContent = left ? left + (left === 1 ? ' step' : ' steps') + ' left, about ' + mins + (mins === 1 ? ' minute' : ' minutes') : 'All done';
+  }
+  function next() { for (var k = 0; k < data.length; k++) if (!data[k].done) return k; return -1; }
+
+  items.forEach(function (li, i) {
+    li.querySelector('.row').addEventListener('click', function () { openOnly(li.classList.contains('open') ? -1 : i); });
+    li.querySelector('.go').addEventListener('click', function () {
+      data[i].done = true; sync();
+      var k = next();
+      // let the tick draw before the next step opens
+      setTimeout(function () {
+        if (k === -1) { setTimeout(function () { card.classList.add('all'); document.getElementById('again').focus(); }, 500); openOnly(-1); }
+        else { openOnly(k); items[k].querySelector('.go').focus({ preventScroll: true }); }
+      }, 360);
+    });
+  });
+  document.getElementById('again').addEventListener('click', function () {
+    data.forEach(function (s, k) { s.done = k < 2; }); card.classList.remove('all'); sync(); openOnly(2); items[2].querySelector('.row').focus();
+  });
+  sync(); openOnly(next());
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bottom drawer</title>
+<style>
+  :root{
+    --backdrop:#000;--page:#ffffff;--ink:#111;--ink2:#6b6b70;--line:#ececee;--sheet:#ffffff;--well:#f4f4f5;--handle:#d4d4d8;
+    --ease:cubic-bezier(.32,.72,0,1);--dur:500ms;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#161618;--ink:#f1f1f3;--ink2:#a0a0a8;--line:#2a2a2e;--sheet:#1e1e21;--well:#29292d;--handle:#46464c}}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:#e9e9ec;display:grid;place-items:center;padding:16px;-webkit-font-smoothing:antialiased}
+  @media (prefers-color-scheme:dark){body{background:#0b0b0c}}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid #0a84ff;outline-offset:2px}
+
+  /* a phone-sized stage so the effect reads at any width */
+  .device{position:relative;width:min(390px,100%);height:min(760px,calc(100vh - 32px));min-height:560px;border-radius:28px;overflow:hidden;background:var(--backdrop);isolation:isolate}
+  .page{position:absolute;inset:0;background:var(--page);color:var(--ink);overflow:hidden;transform-origin:50% 0;
+    transition:transform var(--dur) var(--ease),border-radius var(--dur) var(--ease)}
+  .page header{padding:54px 20px 10px;display:flex;justify-content:space-between;align-items:center}
+  .page header p{margin:0;font-size:13px;color:var(--ink2)}
+  .page h1{margin:0 20px;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  .list{margin:18px 20px 0;padding:0;list-style:none}
+  .list li{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .list li span:last-child{color:var(--ink2);font-variant-numeric:tabular-nums}
+  .share{min-height:44px;padding:0 16px;border:0;border-radius:999px;background:var(--well);font-weight:600;font-size:14px;cursor:pointer}
+
+  .overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity var(--dur) var(--ease);z-index:2}
+  .drawer{position:absolute;left:0;right:0;bottom:0;z-index:3;background:var(--sheet);color:var(--ink);border-radius:14px 14px 0 0;
+    padding:10px 20px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform var(--dur) var(--ease);touch-action:none}
+  .drawer[hidden]{display:block!important;visibility:hidden}
+  .grab{display:block;width:100%;height:24px;margin:-4px 0 6px;padding:0;border:0;background:none;cursor:grab}
+  .grab::before{content:"";display:block;width:36px;height:5px;margin:0 auto;border-radius:3px;background:var(--handle)}
+  .drawer h2{margin:0 0 4px;font-size:17px;letter-spacing:-.01em}
+  .drawer .sub{margin:0 0 18px;font-size:14px;color:var(--ink2)}
+  .people{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+  .person{display:grid;justify-items:center;gap:6px;padding:0;border:0;background:none;font-size:12px;cursor:pointer;min-height:44px}
+  .person i{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:600;font-size:16px;color:#fff}
+  .acts{display:grid;gap:8px}
+  .acts button{display:flex;justify-content:space-between;align-items:center;min-height:50px;padding:0 16px;border:0;border-radius:12px;background:var(--well);font-size:15px;cursor:pointer;text-align:left}
+  .acts button span:last-child{color:var(--ink2);font-size:13px}
+
+  /* open: the page recedes like a card behind the sheet */
+  .open .page{transform:translateY(14px) scale(var(--bg-scale,.93));border-radius:12px}
+  .open .overlay{opacity:1;pointer-events:auto}
+  .open .drawer{transform:translateY(0)}
+  .dragging .page,.dragging .overlay,.dragging .drawer{transition:none}
+  @media (prefers-reduced-motion:reduce){:root{--dur:1ms}}
+</style>
+</head>
+<body>
+<div class="device open" id="device">
+  <main class="page" id="page">
+    <header><p>Saturday, 09:10</p><button class="share" type="button" id="opener" aria-haspopup="dialog">Share</button></header>
+    <h1>Market list</h1>
+    <ul class="list">
+      <li><span>Sourdough, large</span><span>1</span></li>
+      <li><span>Blood oranges</span><span>6</span></li>
+      <li><span>Comté, 18 months</span><span>200 g</span></li>
+      <li><span>Leeks</span><span>3</span></li>
+      <li><span>Flowers for Ana</span><span>1 bunch</span></li>
+    </ul>
+  </main>
+  <div class="overlay" id="overlay"></div>
+  <section class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dh">
+    <button class="grab" type="button" id="grab" aria-label="Close share sheet"></button>
+    <h2 id="dh">Share “Market list”</h2>
+    <p class="sub">5 items · edited 4 minutes ago</p>
+    <div class="people">
+      <button class="person" type="button"><i style="background:#c2410c">AM</i>Ana</button>
+      <button class="person" type="button"><i style="background:#0f766e">JO</i>Jonah</button>
+      <button class="person" type="button"><i style="background:#4338ca">RI</i>Rita</button>
+      <button class="person" type="button"><i style="background:#57534e">+</i>More</button>
+    </div>
+    <div class="acts">
+      <button type="button"><span>Copy link</span><span>Anyone with the link</span></button>
+      <button type="button"><span>Send a copy</span><span>Plain text</span></button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var device = document.getElementById('device'), drawer = document.getElementById('drawer'), page = document.getElementById('page');
+  var overlay = document.getElementById('overlay'), opener = document.getElementById('opener');
+  var SCALE = 0.93;
+  function open() { drawer.hidden = false; device.classList.add('open'); page.inert = true; setTimeout(function () { document.getElementById('grab').focus(); }, 50); }
+  function close() {
+    device.classList.remove('open'); page.inert = false; opener.focus();
+    setTimeout(function () { if (!device.classList.contains('open')) drawer.hidden = true; }, 500);
+  }
+  opener.addEventListener('click', open);
+  overlay.addEventListener('click', close);
+  document.getElementById('grab').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && device.classList.contains('open')) close(); });
+
+  // drag: the sheet follows the finger; the page and overlay follow the sheet's progress
+  var y0 = 0, t0 = 0, dy = 0, dragging = false;
+  drawer.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('.person, .acts button')) return;
+    dragging = true; y0 = e.clientY; t0 = Date.now(); dy = 0;
+    drawer.setPointerCapture(e.pointerId); device.classList.add('dragging');
+  });
+  drawer.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var raw = e.clientY - y0;
+    dy = raw >= 0 ? raw : -8 * Math.log(1 - raw / 8) ; // upward drags resist logarithmically
+    var h = drawer.offsetHeight, p = Math.max(0, Math.min(1, dy / h));
+    drawer.style.transform = 'translateY(' + dy + 'px)';
+    page.style.transform = 'translateY(' + (14 * (1 - p)) + 'px) scale(' + (SCALE + (1 - SCALE) * p) + ')';
+    page.style.borderRadius = (12 * (1 - p)) + 'px';
+    overlay.style.opacity = 1 - p;
+  });
+  function end() {
+    if (!dragging) return; dragging = false;
+    var v = dy / Math.max(1, Date.now() - t0), h = drawer.offsetHeight;
+    device.classList.remove('dragging');
+    drawer.style.transform = page.style.transform = page.style.borderRadius = overlay.style.opacity = '';
+    if (dy > h * 0.25 || v > 0.4) close();
+  }
+  drawer.addEventListener('pointerup', end); drawer.addEventListener('pointercancel', end);
+  page.inert = true;
+})();
+</script>
+</body>
+</html>
