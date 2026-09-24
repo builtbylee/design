@@ -1,5 +1,7 @@
 # Library
 
+**The live gallery is now part of Dissect: https://dissect.builtbylee.workers.dev/gallery.** This folder is its source for hand-made entries: after changing an entry here, run `npm run gallery:seed:remote` in `builtbylee/dissect` to update the site.
+
 A curated collection of excellent, highly polished UI, for browsing and for pointing at when building something new. Each entry is excellent at one thing: its motion, its interaction, its density or its type.
 
 - **`entries/<id>.html`**: a standalone, working demo. Open it in a browser.
